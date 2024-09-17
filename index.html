@@ -1,0 +1,159 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CraxyDEX - Decentralized Exchange</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #f4f7fc;
+            color: #333;
+            margin-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CraxyDEX</h1>
+    </header>
+
+    <div class="container">
+        <div class="content-section">
+            <h2>Welcome to CraxyDEX</h2>
+            <p>Trade cryptocurrencies in a decentralized environment with full control over your assets. Use our fast and secure platform to swap tokens and manage your wallet.</p>
+            <button id="startSwap" class="action-button">Start Swapping</button>
+        </div>
+
+        <div class="content-section">
+            <h2>How it works</h2>
+            <p>Connect your wallet, choose the tokens you want to trade, and start swapping instantly with low fees and no intermediaries.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CraxyDEX. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('startSwap').addEventListener('click', function() {
+            // Esempio di chiamata al backend tramite Fetch API
+            fetch('https://crazydex.railway.internal/swap', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    tokenFrom: 'ETH',
+                    tokenTo: 'BTC',
+                    amount: 0.5
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Gestisci la risposta del backend (esito del trade)
+                alert('Swap Success: ' + JSON.stringify(data));
+            })
+            .catch(error => {
+                console.error('Errore durante lo swap:', error);
+            });
+        });
+
+        // Esempio di funzione per controllare il saldo del wallet
+        function checkWallet() {
+            fetch('https://crazydex.railway.internal/wallet', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(walletData => {
+                console.log('Wallet Data:', walletData);
+                // Gestisci i dati del wallet (mostrali nel frontend)
+            })
+            .catch(error => {
+                console.error('Errore nel recupero del wallet:', error);
+            });
+        }
+    </script>
+</body>
+</html>
